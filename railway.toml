@@ -1,0 +1,11 @@
+# railway.toml
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "docker-compose -f docker-compose.prod.yml up -d"
+restartPolicyType = "ON_FAILURE"
+
+# Variables de entorno que Railway inyectará automáticamente
+[env]
+PORT = "8080"
