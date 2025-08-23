@@ -1,0 +1,29 @@
+# Docker
+docker-compose.override.yml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs
+*.log
+logs/
+
+# Data
+data/
+*.parquet
+*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

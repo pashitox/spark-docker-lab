@@ -1,0 +1,8 @@
+notebook
+pandas
+numpy
+matplotlib
+pyspark==3.4.1
+kafka-python==2.0.2
+requests==2.31.0
+
