@@ -1,8 +1,8 @@
 # Makefile para Spark Streaming con Kafka
 
 # Variables configurables
-COMPOSE_PROD = docker-compose -f docker-compose.prod.yml
-COMPOSE_DEV = docker-compose -f docker-compose.dev.yml
+COMPOSE_PROD = docker compose -f docker-compose.prod.yml
+COMPOSE_DEV = docker compose -f docker-compose.dev.yml
 SHELL := /bin/bash
 
 .PHONY: build build-nocache up down logs clean deploy healthcheck dev stop-dev restart status \
