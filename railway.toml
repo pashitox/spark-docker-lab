@@ -1,9 +1,12 @@
 [build]
-builder = "NIXPACKS"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "docker-compose -f docker-compose.prod.yml up -d"
+startCommand = "python app/main.py"
 restartPolicyType = "ON_FAILURE"
 
 [env]
 PORT = "8080"
+SPARK_MASTER = "local[*]"
+KAFKA_BROKERS = "localhost:9092"
