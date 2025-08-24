@@ -72,31 +72,7 @@ docker-push:
 docker-hub-deploy: docker-build docker-push
 	@echo "✅ Image pushed to Docker Hub"
 
-# Railway deployment
-railway-setup:
-	@echo "🚀 Configurando para Railway..."
-	@echo "1. Creando archivo railway.toml..."
-	@echo '[build]' > railway.toml
-	@echo 'builder = "NIXPACKS"' >> railway.toml
-	@echo '' >> railway.toml
-	@echo '[deploy]' >> railway.toml
-	@echo 'startCommand = "docker compose -f docker-compose.prod.yml up -d"' >> railway.toml
-	@echo 'restartPolicyType = "ON_FAILURE"' >> railway.toml
-	@echo '' >> railway.toml
-	@echo '[env]' >> railway.toml
-	@echo 'PORT = "8080"' >> railway.toml
-	@echo "✅ railway.toml creado"
-	@echo "2. Verifica que docker-compose.prod.yml use tu imagen de Docker Hub"
-	@echo "3. Ejecuta: make railway-deploy"
-	@echo "4. Conecta tu repo en railway.app"
 
-railway-deploy:
-	@echo "🚀 Preparando deploy para Railway..."
-	git add .
-	git commit -m "🚀 Prepare for Railway deployment" || true
-	git push origin main
-	@echo "✅ Código subido a GitHub. Railway hará deploy automáticamente"
-	@echo "🌐 Ve a https://railway.app y conecta tu repositorio"
 
 # Help
 help:
