@@ -13,13 +13,9 @@ ENV SPARK_HOME=/opt/bitnami/spark
 # Usuario root para instalar dependencias
 USER root
 
-RUN mkdir -p /opt/bitnami/spark/events
-RUN chmod 777 /opt/bitnami/spark/events
-
-
 # Crear directorios necesarios y permisos
-RUN mkdir -p /app/jobs /app/utils /logs && \
-    chown -R 1001:1001 /app /logs
+RUN mkdir -p /opt/bitnami/spark/events && chmod -R 777 /opt/bitnami/spark/events
+RUN mkdir -p /app/jobs /app/utils /logs && chown -R 1001:1001 /app /logs
 
 # Instalar dependencias Python
 COPY requirements.txt /app/
@@ -29,7 +25,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY app/ /app/
 COPY config/spark-defaults.conf ${SPARK_HOME}/conf/
 
-# Cambiar permisos
+# Cambiar permisos de la aplicación
 RUN chown -R 1001:1001 /app && chmod -R 755 /app
 
 # Cambiar a usuario no-root
@@ -44,5 +40,5 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
 # Comando por defecto: Spark en modo local
 CMD spark-submit \
     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 \
-    --master local[*] \
     /app/jobs/streaming_job.py
+

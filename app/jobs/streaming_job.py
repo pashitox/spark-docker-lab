@@ -1,15 +1,15 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import from_json, col, from_unixtime
+from pyspark.sql import SparkSession 
+from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StructField, IntegerType, DoubleType
 
 print("Initializing Spark Session...")
 
-# Configuración con packages - approach más confiable
+# Spark en modo local y desactivando eventLog para evitar errores
 spark = SparkSession.builder \
     .appName("KafkaSparkStreaming") \
-    .master("spark://spark-master:7077") \
+    .master("local[*]") \
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1") \
-    .config("spark.sql.adaptive.enabled", "false") \
+    .config("spark.eventLog.enabled", "false") \
     .getOrCreate()
 
 print("Spark Session created successfully")
@@ -39,12 +39,10 @@ try:
         .select(from_json(col("json_value"), schema).alias("data")) \
         .select("data.*")
 
-    # Mostrar el schema para debugging
     processed_df.printSchema()
 
     # Agregaciones simples por sensor_id
     from pyspark.sql.functions import avg
-
     agg_df = processed_df.groupBy("sensor_id").agg(avg("temperature").alias("avg_temperature"))
 
     # Mostrar resultados en consola
@@ -56,7 +54,6 @@ try:
 
     print("Streaming query started successfully!")
     print("Waiting for messages from Kafka...")
-
     query.awaitTermination()
 
 except Exception as e:
