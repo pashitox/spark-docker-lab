@@ -13,6 +13,10 @@ ENV SPARK_HOME=/opt/bitnami/spark
 # Usuario root para instalar dependencias
 USER root
 
+RUN mkdir -p /opt/bitnami/spark/events
+RUN chmod 777 /opt/bitnami/spark/events
+
+
 # Crear directorios necesarios y permisos
 RUN mkdir -p /app/jobs /app/utils /logs && \
     chown -R 1001:1001 /app /logs
