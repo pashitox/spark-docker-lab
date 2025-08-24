@@ -2,8 +2,9 @@
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
+# CORREGIR: Cambiar el startCommand
 [deploy]
-startCommand = "python app/main.py"
+startCommand = "docker compose -f docker-compose.prod.yml up -d"
 restartPolicyType = "ON_FAILURE"
 
 [env]

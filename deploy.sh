@@ -6,11 +6,11 @@ echo "🚀 Starting production deployment..."
 
 # Build with no cache for clean production images
 echo "📦 Building fresh Docker images..."
-docker-compose -f docker-compose.prod.yml build --no-cache
+docker compose -f docker-compose.prod.yml build --no-cache
 
 # Deploy with zero downtime
 echo "🔄 Deploying new version..."
-docker-compose -f docker-compose.prod.yml up -d --remove-orphans
+docker compose -f docker-compose.prod.yml up -d --remove-orphans
 
 # Health check verification (optional)
 echo "⏳ Verifying services health..."
@@ -27,4 +27,4 @@ fi
 echo "🎉 Deployment completed successfully!"
 echo "📊 Spark UI: http://localhost:8080"
 echo "🔗 Kafka: localhost:9092"
-echo "📝 View logs: docker-compose -f docker-compose.prod.yml logs -f"
+echo "📝 View logs: docker compose -f docker-compose.prod.yml logs -f"

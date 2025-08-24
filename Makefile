@@ -80,7 +80,7 @@ railway-setup:
 	@echo 'builder = "NIXPACKS"' >> railway.toml
 	@echo '' >> railway.toml
 	@echo '[deploy]' >> railway.toml
-	@echo 'startCommand = "docker-compose -f docker-compose.prod.yml up -d"' >> railway.toml
+	@echo 'startCommand = "docker compose -f docker-compose.prod.yml up -d"' >> railway.toml
 	@echo 'restartPolicyType = "ON_FAILURE"' >> railway.toml
 	@echo '' >> railway.toml
 	@echo '[env]' >> railway.toml
